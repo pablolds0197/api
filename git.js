@@ -7,8 +7,4 @@ git remote add origin https://github.com/pablolds0197/api.git
 git push -u origin main
 */
 
-const { init } = require("./models/usuario")
 
-
-git init
-git commint -m "primer commit "
