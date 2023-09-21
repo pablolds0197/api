@@ -1,33 +1,31 @@
-const express = require('express')// Framework de node
-const cookieParser = require('cookie-parser');//Para variables en el navegador
-const cors  = require('cors');//Implementar seguridad
-const bodyParser = require('body-parser')//Recibir datos de formularios html
-const { dbConnection } = require('../database/config')
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const { dbConnection } = require('../database/config');
 
-class Server{
-
-    constructor(){
-        this.app = express()
-        this.port = process.env.PORT //Capturando variable puerto
-        this.usuarioPath = '/api/usuario' //Ruta pública
-        this.conectarDB()
-        this.routes()
+class Server {
+    constructor() {
+        this.app = express();
+        this.port = process.env.PORT;
+        this.insumosPath = '/api/insumos'; // Cambiamos la ruta a 'insumos'
+        this.conectarDB();
+        this.routes();
     }
 
-    listen(){
+    listen() {
         this.app.listen(this.port, () => {
-            console.log(`Escuchando por el puerto ${this.port}`)
-        })
+            console.log(`Escuchando por el puerto ${this.port}`);
+        });
     }
 
-    routes(){
-        this.app.use(this.usuarioPath, require('../routes/usuario'))
+    routes() {
+        this.app.use(this.insumosPath, require('../routes/insumos')); // Cambiamos a 'insumos'
     }
-    
 
-    async conectarDB(){
-        await dbConnection() //Esperar la respuesta del servidor        
+    async conectarDB() {
+        await dbConnection();
     }
 }
 
-module.exports =  Server
+module.exports = Server;
